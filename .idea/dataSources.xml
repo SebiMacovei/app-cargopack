@@ -16,5 +16,23 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="app-cargopack-back: development" uuid="ee899da2-6177-42e2-8da9-65cf0991ffa3">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Sebi\Desktop\INFO\Proiecte-CV\App-cargopack\app-cargopack-back\db\development.sqlite3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="app-cargopack-back: test" uuid="c8f090e3-194c-4a34-a85e-62b0d6562143">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Sebi\Desktop\INFO\Proiecte-CV\App-cargopack\app-cargopack-back\db\test.sqlite3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

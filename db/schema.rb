@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_19_172956) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_22_175921) do
+  create_table "cars", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "plate_number", default: "", null: false
+    t.boolean "license", default: false, null: false
+    t.integer "max_weight", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "extension_id"
+    t.index ["extension_id"], name: "index_cars_on_extension_id"
+  end
+
+  create_table "cars_users", force: :cascade do |t|
+    t.integer "cars_id"
+    t.integer "users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cars_id"], name: "index_cars_users_on_cars_id"
+    t.index ["users_id"], name: "index_cars_users_on_users_id"
+  end
+
   create_table "client_types", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", null: false
@@ -55,6 +75,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_172956) do
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
+  create_table "extensions", force: :cascade do |t|
+    t.string "extension_type", default: "", null: false
+    t.string "plate_number", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "packages", force: :cascade do |t|
     t.integer "number_load", default: 0, null: false
     t.boolean "paid", default: false, null: false
@@ -65,6 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_172956) do
     t.integer "passenger_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "current_car_id"
+    t.index ["current_car_id"], name: "index_packages_on_current_car_id"
     t.index ["giver_id"], name: "index_packages_on_giver_id"
     t.index ["passenger_id"], name: "index_packages_on_passenger_id"
     t.index ["receiver_id"], name: "index_packages_on_receiver_id"
@@ -90,10 +119,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_172956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", default: ""
+    t.integer "current_car_id"
+    t.index ["current_car_id"], name: "index_users_on_current_car_id"
     t.index ["phone"], name: "index_users_on_phone", unique: true
   end
 
+  add_foreign_key "cars", "extensions"
+  add_foreign_key "packages", "cars", column: "current_car_id"
   add_foreign_key "packages", "clients", column: "giver_id"
   add_foreign_key "packages", "clients", column: "passenger_id"
   add_foreign_key "packages", "clients", column: "receiver_id"
+  add_foreign_key "users", "cars", column: "current_car_id"
 end
