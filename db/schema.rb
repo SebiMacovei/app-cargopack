@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_22_175921) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_08_152403) do
+  create_table "car_users", force: :cascade do |t|
+    t.integer "car_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_car_users_on_car_id"
+    t.index ["user_id"], name: "index_car_users_on_user_id"
+  end
+
   create_table "cars", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "plate_number", default: "", null: false
@@ -20,15 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_22_175921) do
     t.datetime "updated_at", null: false
     t.integer "extension_id"
     t.index ["extension_id"], name: "index_cars_on_extension_id"
-  end
-
-  create_table "cars_users", force: :cascade do |t|
-    t.integer "cars_id"
-    t.integer "users_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cars_id"], name: "index_cars_users_on_cars_id"
-    t.index ["users_id"], name: "index_cars_users_on_users_id"
   end
 
   create_table "client_types", force: :cascade do |t|
@@ -97,6 +97,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_22_175921) do
     t.index ["giver_id"], name: "index_packages_on_giver_id"
     t.index ["passenger_id"], name: "index_packages_on_passenger_id"
     t.index ["receiver_id"], name: "index_packages_on_receiver_id"
+  end
+
+  create_table "trip_cars", force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "car_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_trip_cars_on_car_id"
+    t.index ["trip_id"], name: "index_trip_cars_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
