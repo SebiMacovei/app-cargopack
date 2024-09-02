@@ -9,13 +9,13 @@ class ClientsController < ApplicationController
     render :json => client.to_json(:include => :client_type)
   end
   def create
-    client = Client.create(post_params)
+    client = Client.create(client_params)
     render json: client
   end
 
   def update
     client = Client.find(params[:id])
-    client.update(post_params)
+    client.update(client_params)
     render json: client
   end
 
@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
     render json: client
   end
 
-  def post_params
+  def client_params
     params.require(:client)
           .permit(:name, :pick_up_address, :drop_off_address, :phone, :client_type_id, :paid, :paid_value)
   end

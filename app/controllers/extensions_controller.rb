@@ -10,13 +10,13 @@ class ExtensionsController < ApplicationController
   end
 
   def create
-    extension = Expense.create(post_params)
+    extension = Expense.create(extension_params)
     render json: extension
   end
 
   def update
     extension = Expense.find(params[:id])
-    extension.update(post_params)
+    extension.update(extension_params)
     render json: extension
   end
 
@@ -26,7 +26,7 @@ class ExtensionsController < ApplicationController
     render json: extension
   end
 
-  def post_params
+  def extension_params
     params.require(:extension)
           .permit(:extension_type, :plate_number)
   end

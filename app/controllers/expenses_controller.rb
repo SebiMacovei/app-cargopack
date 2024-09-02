@@ -8,13 +8,13 @@ class ExpensesController < ApplicationController
     render json: expense.to_json(:include => [:expense_type, :user, :trip])
   end
   def create
-    expense = Expense.create(post_params)
+    expense = Expense.create(expense_params)
     render json: expense
   end
 
   def update
     expense = Expense.find(params[:id])
-    expense.update(post_params)
+    expense.update(expense_params)
     render json: expense
   end
 
@@ -24,7 +24,7 @@ class ExpensesController < ApplicationController
     render json: expense
   end
 
-  def post_params
+  def expense_params
     params.require(:expense)
           .permit(:user_id, :trip_id, :expense_type_id, :value)
   end

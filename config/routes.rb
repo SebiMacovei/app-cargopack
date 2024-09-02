@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   get "/clients/:id", to: "clients#find_by_id"
   get "/cars/:id", to: "cars#find_by_id"
   get "/extensions/:id", to: "extensions#find_by_id"
+  get "/current-user", to: "users#get_current_user"
 end

@@ -8,13 +8,13 @@ class CarsController < ApplicationController
     render :json => car
   end
   def create
-    car = Car.create(post_params)
+    car = Car.create(car_params)
     render json: car
   end
 
   def update
     car = Car.find(params[:id])
-    car.update(post_params)
+    car.update(car_params)
     render json: car
   end
 
@@ -24,7 +24,7 @@ class CarsController < ApplicationController
     render json: car
   end
 
-  def post_params
+  def car_params
     params.require(:car)
           .permit(:name, :plate_number, :license,:extention_id,:max_weight)
   end

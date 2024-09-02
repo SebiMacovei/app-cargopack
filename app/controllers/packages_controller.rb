@@ -8,13 +8,13 @@ class PackagesController < ApplicationController
     render json: expense.to_json(:include => [:giver,:receiver,:passenger,:current_car])
   end
   def create
-    package = Package.create(post_params)
+    package = Package.create(package_params)
     render json: package
   end
 
   def update
     package = Package.find(params[:id])
-    package.update(post_params)
+    package.update(package_params)
     render json: package
   end
 
@@ -24,7 +24,7 @@ class PackagesController < ApplicationController
     render json: package
   end
 
-  def post_params
+  def package_params
     params.require(:package)
           .permit(:giver_id, :receiver_id, :passenger_id, :number_load, :weight, :paid, :paid_value)
   end

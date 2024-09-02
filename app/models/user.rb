@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :expenses
   has_many :car_users
   has_many :cars, through: :car_users
-
+  has_one_attached :avatar
   belongs_to :current_car, class_name: "Car", optional: true
 
 

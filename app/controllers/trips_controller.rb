@@ -50,7 +50,7 @@ class TripsController < ApplicationController
 
   def update
     trip = Trip.find(params[:id])
-    trip.update(post_params)
+    trip.update(trip_params)
     render json: trip
   end
 
@@ -60,7 +60,7 @@ class TripsController < ApplicationController
     render json: trip
   end
 
-  def post_params
+  def trip_params
     params.require(:trip)
           .permit(:start_date, :end_date, :destination_id)
   end
