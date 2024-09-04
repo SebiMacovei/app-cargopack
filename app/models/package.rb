@@ -4,4 +4,5 @@ class Package < ApplicationRecord
   belongs_to :giver, class_name: "Client", optional: true
   belongs_to :receiver, class_name: "Client", optional: true
   belongs_to :passenger, class_name: "Client", optional: true
+  has_many_attached :images
 end

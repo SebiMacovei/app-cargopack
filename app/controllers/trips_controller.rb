@@ -9,6 +9,13 @@ class TripsController < ApplicationController
     render json: trip.to_json(:include => :destination)
   end
 
+  def current_trips
+    start_of_week = Date.today.beginning_of_week
+    end_of_week = Date.today.end_of_week
+    tur_current_week = Trip.where(start_date: start_of_week..end_of_week, end_date: start_of_week..end_of_week, destination: 2  ).as_json(:include => :destination)
+    retur_current_week = Trip.where(start_date: start_of_week..end_of_week, end_date: start_of_week..end_of_week, destination: 1 ).as_json(:include => :destination)
+    render json: {currentTurs:tur_current_week, currentReturs:retur_current_week}
+  end
   def create
     destination_tur_id = Destination.find_by(:destination_type => 1).id
     destination_retur_id = Destination.find_by(:destination_type => 0).id

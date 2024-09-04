@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   get "/cars/:id", to: "cars#find_by_id"
   get "/extensions/:id", to: "extensions#find_by_id"
   get "/current-user", to: "users#get_current_user"
+  get "/current-trips", to: "trips#current_trips"
 end
